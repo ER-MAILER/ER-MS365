@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ER-MS 365 Azure Portal | Advanced Data Upload Software</title>
+    <style>
+        :root {
+            --primary: #0078d4;
+            --secondary: #106ebe;
+            --accent: #ffaa44;
+            --light: #f3f2f1;
+            --dark: #201f1e;
+            --success: #107c10;
+            --danger: #d83b01;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent);
+            color: var(--dark);
+            padding: 0.8rem 2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+        }
+        
+        .cta-button:hover {
+            background-color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .contact-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+        }
+        
+        .contact-button.whatsapp {
+            background-color: #25D366;
+        }
+        
+        .contact-button.email {
+            background-color: #D44638;
+        }
+        
+        .contact-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            opacity: 0.9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+        
+        .pricing {
+            background-color: white;
+            padding: 4rem 0;
+        }
+        
+        .pricing-plan {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            border-top: 4px solid var(--accent);
+        }
+        
+        .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+        
+        .price span {
+            font-size: 1rem;
+            color: var(--dark);
+            opacity: 0.7;
+        }
+        
+        .pricing-features {
+            list-style: none;
+            margin: 2rem 0;
+            text-align: left;
+        }
+        
+        .pricing-features li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        
+        .pricing-features li::before {
+            content: '✓';
+            color: var(--success);
+            margin-right: 0.5rem;
+            font-weight: bold;
+        }
+        
+        .download {
+            text-align: center;
+            padding: 4rem 0;
+        }
+        
+        .download-options {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .contact {
+            background-color: var(--light);
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .contact-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin: 1rem 0;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+        }
+        
+        /* New Styles for Additional Features */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 3rem 0;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .testimonials {
+            background-color: var(--light);
+            padding: 4rem 0;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            font-size: 5rem;
+            color: rgba(0, 120, 212, 0.1);
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            line-height: 1;
+        }
+        
+        .testimonial-content {
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            font-weight: 700;
+            color: var(--secondary);
+        }
+        
+        .testimonial-role {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .integrations {
+            text-align: center;
+            padding: 4rem 0;
+        }
+        
+        .integration-logos {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .integration-logo {
+            width: 120px;
+            height: 60px;
+            object-fit: contain;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+        
+        .integration-logo:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+        
+        .demo-video {
+            background-color: var(--dark);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .video-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .video-container iframe {
+            width: 100%;
+            height: 450px;
+            border: none;
+        }
+        
+        .faq {
+            padding: 4rem 0;
+        }
+        
+        .faq-item {
+            background: white;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .faq-question {
+            padding: 1.5rem;
+            background-color: var(--primary);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-answer {
+            padding: 1.5rem;
+            display: none;
+        }
+        
+        .faq-question i {
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+        
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .tagline {
+                font-size: 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.5rem;
+            }
+            
+            .contact-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .download-options {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .video-container iframe {
+                height: 250px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-cloud-upload-alt" style="margin-right: 15px;"></i>
+                ER-MS <span>365</span> Azure Portal
+            </div>
+            <p class="tagline">Advanced data uploading solution for your business. Seamless integration with Azure and other cloud services.</p>
+            <a href="#download" class="cta-button">Download Now</a>
+            <a href="#pricing" class="cta-button">View Pricing</a>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- Stats Section -->
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number">10K+</div>
+                <div>Happy Customers</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">99.9%</div>
+                <div>Uptime</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">5x</div>
+                <div>Faster Uploads</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">256-bit</div>
+                <div>Encryption</div>
+            </div>
+        </div>
+        
+        <section class="features-section">
+            <div class="section-title">
+                <h2>Why Choose ER-MS 365?</h2>
+            </div>
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Lightning Fast Uploads</h3>
+                    <p>Experience unparalleled upload speeds with our optimized data transfer algorithms and multi-threaded architecture.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Military-Grade Security</h3>
+                    <p>Your data is protected with end-to-end 256-bit encryption, two-factor authentication, and advanced security protocols.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Seamless Integration</h3>
+                    <p>Works flawlessly with Azure services, AWS, Google Cloud, and other enterprise platforms via API.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Real-time Analytics</h3>
+                    <p>Monitor your uploads with detailed analytics and reporting dashboard for better insights.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3>Auto Sync</h3>
+                    <p>Set up automatic synchronization between local folders and cloud storage with customizable schedules.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Team Collaboration</h3>
+                    <p>Share files securely with team members, set permissions, and track changes with version control.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Demo Video Section -->
+    <section class="demo-video">
+        <div class="container">
+            <div class="section-title">
+                <h2>See ER-MS 365 in Action</h2>
+            </div>
+            <p>Watch our 2-minute demo to see how ER-MS 365 can transform your data upload workflow</p>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="ER-MS 365 Demo" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+    
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-title">
+                <h2>Simple, Transparent Pricing</h2>
+            </div>
+            <div class="pricing-plan">
+                <h3>Premium Plan</h3>
+                <div class="price">$29.99 <span>/month</span></div>
+                <p>Billed annually at $359.88 (save 20%)</p>
+                <ul class="pricing-features">
+                    <li>Unlimited storage capacity</li>
+                    <li>Advanced upload features</li>
+                    <li>Priority 24/7 support</li>
+                    <li>Up to 10 user accounts</li>
+                    <li>Full API access</li>
+                    <li>Automated backups</li>
+                    <li>Real-time analytics dashboard</li>
+                    <li>Custom branding options</li>
+                    <li>Team collaboration tools</li>
+                    <li>Regular updates and new features</li>
+                </ul>
+                <a href="#download" class="cta-button">Get Started</a>
+                <p style="margin-top: 1rem; font-size: 0.9rem;">30-day money back guarantee</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Integrations Section -->
+    <section class="integrations">
+        <div class="container">
+            <div class="section-title">
+                <h2>Works With Your Favorite Tools</h2>
+            </div>
+            <p>ER-MS 365 integrates seamlessly with the platforms you already use</p>
+            <div class="integration-logos">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Microsoft_Azure_Logo.svg" alt="Azure" class="integration-logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS" class="integration-logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.svg" alt="Google Cloud" class="integration-logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/7d/Microsoft_Office_logo_%282019%E2%80%93present%29.svg" alt="Office 365" class="integration-logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Google_Drive_logo.svg" alt="Google Drive" class="integration-logo">
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>What Our Customers Say</h2>
+            </div>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        ER-MS 365 has revolutionized our data upload process. What used to take hours now takes minutes, and the security features give us peace of mind.
+                    </div>
+                    <div class="testimonial-author">Sarah Johnson</div>
+                    <div class="testimonial-role">CTO, TechSolutions Inc.</div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        The seamless integration with Azure was exactly what we needed. Our team collaboration has improved dramatically since we implemented ER-MS 365.
+                    </div>
+                    <div class="testimonial-author">Michael Chen</div>
+                    <div class="testimonial-role">IT Director, Global Enterprises</div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        As a non-technical user, I appreciate how intuitive the interface is while still offering powerful features under the hood. Highly recommended!
+                    </div>
+                    <div class="testimonial-author">Emily Rodriguez</div>
+                    <div class="testimonial-role">Marketing Director, BrightStar</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="container">
+            <div class="section-title">
+                <h2>Frequently Asked Questions</h2>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    What file types does ER-MS 365 support?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    ER-MS 365 supports all common file types including documents (PDF, DOCX, XLSX, PPTX), images (JPG, PNG, GIF), videos (MP4, MOV), audio files (MP3, WAV), and compressed files (ZIP, RAR). There are no restrictions on file types.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Is my data secure with ER-MS 365?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Absolutely. We use 256-bit end-to-end encryption for all data transfers and storage. Additionally, we offer two-factor authentication and comply with major data protection regulations including GDPR and CCPA.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Can I try before I buy?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Yes! We offer a fully-featured 14-day free trial with no credit card required. After the trial period, you can choose to subscribe to our premium plan.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    How does the pricing work for teams?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Our premium plan includes up to 10 user accounts. For larger teams, we offer enterprise pricing with custom user limits and additional features. Contact our sales team for enterprise quotes.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    What if I need help setting up?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Our premium customers get access to 24/7 priority support including live chat, email, and phone support. We also offer onboarding sessions with our technical team to ensure smooth implementation.
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="download" id="download">
+        <div class="container">
+            <div class="section-title">
+                <h2>Download ER-MS 365</h2>
+            </div>
+            <p>Get started with ER-MS 365 today. Choose your platform below.</p>
+            <div class="download-options">
+                <a href="#" class="cta-button"><i class="fab fa-windows"></i> Windows</a>
+                <a href="#" class="cta-button"><i class="fab fa-apple"></i> macOS</a>
+                <a href="#" class="cta-button"><i class="fab fa-linux"></i> Linux</a>
+                <a href="#" class="cta-button"><i class="fas fa-mobile-alt"></i> Mobile App</a>
+            </div>
+            <p style="margin-top: 1rem;">System Requirements: Windows 10+, macOS 10.14+, Linux (most distributions), 4GB RAM, 500MB disk space</p>
+        </div>
+    </section>
+    
+    <section class="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Us</h2>
+            </div>
+            <p>Have questions? We're here to help!</p>
+            <div class="contact-buttons">
+                <a href="https://wa.me/8801735541326" class="contact-button whatsapp">
+                    <i class="fab fa-whatsapp"></i> WhatsApp: +880 173 554 1326
+                </a>
+                <a href="mailto:support@er-ms365.com" class="contact-button email">
+                    <i class="fas fa-envelope"></i> Email: support@er-ms365.com
+                </a>
+                <a href="tel:+8801735541326" class="contact-button">
+                    <i class="fas fa-phone"></i> Call: +880 173 554 1326
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="logo" style="font-size: 1.8rem; margin-bottom: 1rem;">
+            <i class="fas fa-cloud-upload-alt" style="margin-right: 10px;"></i>
+            ER-MS <span>365</span> Azure Portal
+        </div>
+        <div class="footer-links">
+            <a href="#">Home</a>
+            <a href="#features">Features</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#download">Download</a>
+            <a href="#contact">Contact</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">SLA</a>
+            <a href="#">Blog</a>
+            <a href="#">Careers</a>
+        </div>
+        <div style="margin: 1rem 0;">
+            <a href="#" style="color: white; margin: 0 0.5rem;"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" style="color: white; margin: 0 0.5rem;"><i class="fab fa-twitter"></i></a>
+            <a href="#" style="color: white; margin: 0 0.5rem;"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" style="color: white; margin: 0 0.5rem;"><i class="fab fa-youtube"></i></a>
+        </div>
+        <p>&copy; 2023 ER-MS 365 Azure Portal. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Simple FAQ toggle functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                faqItem.classList.toggle('active');
+                
+                // Close other open FAQs
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    if (item !== faqItem && item.classList.contains('active')) {
+                        item.classList.remove('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
