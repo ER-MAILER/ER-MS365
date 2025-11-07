@@ -3,772 +3,1084 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ER-MS 365 | Advanced Data Upload Software</title>
+    <title>ER | Azure Portal - Microsoft Data Uploading Software</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary: #0078d4;
-            --secondary: #106ebe;
-            --accent: #ffaa44;
+            --secondary: #005a9e;
+            --accent: #107c10;
+            --highlight: #ffb900;
             --light: #f3f2f1;
-            --dark: #201f1e;
+            --dark: #323130;
             --success: #107c10;
-            --danger: #d83b01;
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            --gradient: linear-gradient(135deg, #0078d4 0%, #005a9e 50%, #107c10 100%);
+            --microsoft-gradient: linear-gradient(135deg, #0078d4 0%, #005a9e 100%);
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         body {
-            background-color: #f9f9f9;
+            background-color: var(--light);
             color: var(--dark);
             line-height: 1.6;
+            overflow-x: hidden;
         }
-        
-        header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 2rem 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .logo {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .logo span {
-            color: var(--accent);
-        }
-        
-        .tagline {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            max-width: 700px;
-            margin: 0 auto 2rem;
-        }
-        
-        .cta-button {
-            display: inline-block;
-            background-color: var(--accent);
-            color: var(--dark);
-            padding: 0.8rem 2rem;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            margin: 0.5rem;
-        }
-        
-        .cta-button:hover {
-            background-color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .contact-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background-color: var(--primary);
-            color: white;
-            padding: 0.8rem 1.5rem;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            margin: 0.5rem;
-        }
-        
-        .contact-button.whatsapp {
-            background-color: #25D366;
-        }
-        
-        .contact-button.email {
-            background-color: #D44638;
-        }
-        
-        .contact-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            opacity: 0.9;
-        }
-        
+
         .container {
+            width: 90%;
             max-width: 1200px;
-            margin: 3rem auto;
-            padding: 0 2rem;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-            position: relative;
-        }
-        
-        .section-title h2 {
-            font-size: 2rem;
-            color: var(--primary);
-            display: inline-block;
-            padding-bottom: 0.5rem;
-        }
-        
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            width: 50px;
-            height: 3px;
-            background-color: var(--accent);
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 4rem;
-        }
-        
-        .feature-card {
-            background-color: white;
-            border-radius: 8px;
-            padding: 2rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-            text-align: center;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-10px);
-        }
-        
-        .feature-icon {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-        
-        .feature-card h3 {
-            margin-bottom: 1rem;
-            color: var(--secondary);
-        }
-        
-        .pricing {
-            background-color: white;
-            padding: 4rem 0;
-        }
-        
-        .pricing-plan {
-            max-width: 500px;
             margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
             background-color: white;
-            border-radius: 8px;
-            padding: 2rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            border-top: 4px solid var(--accent);
-        }
-        
-        .price {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin: 1rem 0;
-        }
-        
-        .price span {
-            font-size: 1rem;
             color: var(--dark);
-            opacity: 0.7;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
         }
-        
-        .pricing-features {
-            list-style: none;
-            margin: 2rem 0;
-            text-align: left;
-        }
-        
-        .pricing-features li {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            align-items: center;
-        }
-        
-        .pricing-features li::before {
-            content: '✓';
-            color: var(--success);
-            margin-right: 0.5rem;
-            font-weight: bold;
-        }
-        
-        .download {
-            text-align: center;
-            padding: 4rem 0;
-        }
-        
-        .download-options {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-        
-        .contact {
-            background-color: var(--light);
-            padding: 4rem 0;
-            text-align: center;
-        }
-        
-        .contact-buttons {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-        
-        footer {
-            background-color: var(--dark);
-            color: white;
-            text-align: center;
-            padding: 2rem 0;
-            margin-top: 3rem;
-        }
-        
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 2rem;
-            margin: 1rem 0;
-        }
-        
-        .footer-links a {
-            color: white;
-            text-decoration: none;
-            opacity: 0.8;
-            transition: opacity 0.3s ease;
-        }
-        
-        .footer-links a:hover {
-            opacity: 1;
-        }
-        
-        /* New Styles for Additional Features */
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1rem;
-            margin: 3rem 0;
-        }
-        
-        .stat-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-        
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-        
-        .testimonials {
-            background-color: var(--light);
-            padding: 4rem 0;
-        }
-        
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .testimonial-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            position: relative;
-        }
-        
-        .testimonial-card::before {
-            content: '"';
-            font-size: 5rem;
-            color: rgba(0, 120, 212, 0.1);
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            line-height: 1;
-        }
-        
-        .testimonial-content {
-            margin-bottom: 1rem;
-            font-style: italic;
-        }
-        
-        .testimonial-author {
-            font-weight: 700;
-            color: var(--secondary);
-        }
-        
-        .testimonial-role {
-            font-size: 0.9rem;
-            color: #666;
-        }
-        
-        .integrations {
-            text-align: center;
-            padding: 4rem 0;
-        }
-        
-        .integration-logos {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-        
-        .integration-logo {
-            width: 120px;
-            height: 60px;
-            object-fit: contain;
-            filter: grayscale(100%);
-            opacity: 0.7;
-            transition: all 0.3s ease;
-        }
-        
-        .integration-logo:hover {
-            filter: grayscale(0%);
-            opacity: 1;
-        }
-        
-        .demo-video {
-            background-color: var(--dark);
-            color: white;
-            padding: 4rem 0;
-            text-align: center;
-        }
-        
-        .video-container {
-            max-width: 800px;
-            margin: 2rem auto;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-        
-        .video-container iframe {
-            width: 100%;
-            height: 450px;
-            border: none;
-        }
-        
-        .faq {
-            padding: 4rem 0;
-        }
-        
-        .faq-item {
-            background: white;
-            margin-bottom: 1rem;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
-        }
-        
-        .faq-question {
-            padding: 1.5rem;
-            background-color: var(--primary);
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
+
+        .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        
-        .faq-answer {
-            padding: 1.5rem;
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+
+        nav a:hover:after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .mobile-menu {
             display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary);
         }
-        
-        .faq-question i {
-            transition: transform 0.3s ease;
+
+        /* Hero Section */
+        .hero {
+            background: var(--microsoft-gradient);
+            color: white;
+            padding: 6rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
-        
-        .faq-item.active .faq-question i {
-            transform: rotate(180deg);
+
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" opacity="0.05"><path fill="white" d="M500,100C229.4,100,10,319.4,10,590s219.4,490,490,490s490-219.4,490-490S770.6,100,500,100z M500,900c-170.7,0-310-139.3-310-310s139.3-310,310-310s310,139.3,310,310S670.7,900,500,900z"/></svg>');
+            background-size: 300px;
         }
-        
-        .faq-item.active .faq-answer {
-            display: block;
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
         }
-        
+
+        .hero h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--highlight);
+            color: var(--dark);
+            padding: 15px 35px;
+            border-radius: 2px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:hover {
+            background-color: #ffc83d;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 0;
+            background-color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            color: var(--primary);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            color: #666;
+            max-width: 700px;
+            margin: 1.5rem auto 0;
+            font-size: clamp(1rem, 2vw, 1.1rem);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .feature-card {
+            background-color: white;
+            border-radius: 4px;
+            padding: 2.5rem 2rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-top: 4px solid var(--primary);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        /* Products Section */
+        .products {
+            padding: 6rem 0;
+            background-color: #f5f7fa;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: var(--accent);
+            color: white;
+            padding: 5px 30px;
+            transform: rotate(45deg);
+            font-weight: 600;
+            font-size: 0.8rem;
+            z-index: 2;
+        }
+
+        .product-header {
+            background: var(--microsoft-gradient);
+            color: white;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .product-header h3 {
+            font-size: clamp(1.4rem, 3vw, 1.8rem);
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            font-weight: 600;
+            color: white;
+            margin: 1rem 0;
+        }
+
+        .product-price span {
+            font-size: 1rem;
+            font-weight: 400;
+            opacity: 0.8;
+        }
+
+        .product-body {
+            padding: 2.5rem 2rem;
+        }
+
+        .product-features {
+            list-style: none;
+            margin-bottom: 2.5rem;
+        }
+
+        .product-features li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+
+        .product-features li:last-child {
+            border-bottom: none;
+        }
+
+        .product-features li i {
+            color: var(--success);
+            margin-right: 10px;
+            font-size: 1.1rem;
+        }
+
+        .download-info {
+            background-color: #f8f9fa;
+            padding: 1.2rem;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            border-left: 4px solid var(--primary);
+        }
+
+        .download-info strong {
+            color: var(--primary);
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            padding: 6rem 0;
+            background-color: white;
+        }
+
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+
+        .step {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .step:not(:last-child):after {
+            content: '';
+            position: absolute;
+            top: 70px;
+            right: -10%;
+            width: 20%;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 6rem 0;
+            background-color: #f5f7fa;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 1.5rem;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .faq-question {
+            background-color: white;
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .faq-question:hover {
+            background-color: #f8f9fa;
+        }
+
+        .faq-answer {
+            background-color: white;
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-answer.active {
+            padding: 1.5rem;
+            max-height: 500px;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 6rem 0;
+            background: var(--microsoft-gradient);
+            color: white;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact p {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            opacity: 0.9;
+        }
+
+        .support-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: var(--accent);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 2px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .support-button:hover {
+            background-color: #0e6b0e;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 4rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--highlight);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 3px;
+            background: var(--highlight);
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: var(--highlight);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .container {
+                width: 95%;
+            }
+            
+            .hero {
+                padding: 4rem 0;
+            }
+            
+            .features, .products, .how-it-works, .faq, .contact {
+                padding: 4rem 0;
+            }
+            
+            .features-grid, .products-grid {
+                gap: 2rem;
+            }
+            
+            .feature-card, .product-card {
+                padding: 2rem 1.5rem;
+            }
+            
+            .step:not(:last-child):after {
+                display: none;
+            }
+        }
+
         @media (max-width: 768px) {
-            .logo {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+                display: none;
+                width: 100%;
+                padding-top: 1rem;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero {
+                padding: 3rem 0;
+            }
+            
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section-title h2 {
                 font-size: 2rem;
             }
             
-            .tagline {
-                font-size: 1rem;
+            .features, .products, .how-it-works, .faq, .contact {
+                padding: 3rem 0;
             }
             
-            .section-title h2 {
-                font-size: 1.5rem;
+            .features-grid, .products-grid {
+                grid-template-columns: 1fr;
             }
             
-            .contact-buttons {
+            .steps {
                 flex-direction: column;
-                align-items: center;
+                gap: 2rem;
             }
             
-            .download-options {
-                flex-direction: column;
-                align-items: center;
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
             }
             
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
+            .footer-column {
+                text-align: center;
             }
             
-            .video-container iframe {
-                height: 250px;
+            .footer-column h3:after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .social-links {
+                justify-content: center;
             }
         }
         
         @media (max-width: 480px) {
-            .stats {
-                grid-template-columns: 1fr;
+            .container {
+                width: 100%;
+                padding: 0 20px;
+            }
+            
+            .hero {
+                padding: 2.5rem 0;
+            }
+            
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .cta-button, .support-button {
+                padding: 12px 25px;
+                font-size: 1rem;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .feature-card, .product-card {
+                padding: 1.5rem 1rem;
+            }
+            
+            .product-header {
+                padding: 2rem 1.5rem;
+            }
+            
+            .product-body {
+                padding: 2rem 1.5rem;
+            }
+            
+            .faq-question {
+                padding: 1.2rem;
+            }
+            
+            .faq-answer.active {
+                padding: 1.2rem;
             }
         }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+    <!-- Header -->
     <header>
-        <div class="header-content">
-            <div class="logo">
-                ER-MS<span>365</span> Advanced Data Upload Software
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fab fa-microsoft"></i>
+                    <h1>ER | <span>Azure Portal</span></h1>
+                </div>
+                <nav>
+                    <ul id="nav-menu">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#contact">Support</a></li>
+                    </ul>
+                </nav>
+                <div class="mobile-menu" id="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
             </div>
-            <p class="tagline">Advanced data uploading solution for your business. Seamless integration with Azure and other cloud services.</p>
-            <a href="#download" class="cta-button">Download Now</a>
-            <a href="#pricing" class="cta-button">View Pricing</a>
         </div>
     </header>
-    
-    <div class="container">
-        <!-- Stats Section -->
-        <div class="stats">
-            <div class="stat-card">
-                <div class="stat-number">10K+</div>
-                <div>Happy Customers</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">99.9%</div>
-                <div>Uptime</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">5x</div>
-                <div>Faster Uploads</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">256-bit</div>
-                <div>Encryption</div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content fade-in">
+                <h2>Microsoft Data Uploading Software</h2>
+                <p>Securely upload, manage, and synchronize your data with Microsoft Azure cloud services using our powerful desktop application.</p>
+                <a href="#products" class="cta-button">Get Started Now</a>
             </div>
         </div>
-        
-        <section class="features-section">
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
             <div class="section-title">
-                <h2>Why Choose ER-MS 365?</h2>
+                <h2>Powerful Data Management Features</h2>
+                <p>Our software integrates seamlessly with Microsoft Azure to provide enterprise-grade data uploading solutions</p>
             </div>
-            <div class="features">
-                <div class="feature-card">
+            <div class="features-grid">
+                <div class="feature-card fade-in">
                     <div class="feature-icon">
-                        <i class="fas fa-bolt"></i>
+                        <i class="fas fa-cloud-upload-alt"></i>
                     </div>
-                    <h3>Lightning Fast Uploads</h3>
-                    <p>Experience unparalleled upload speeds with our optimized data transfer algorithms and multi-threaded architecture.</p>
+                    <h3>Secure Cloud Upload</h3>
+                    <p>Upload your data securely to Microsoft Azure with end-to-end encryption and advanced security protocols.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3>Military-Grade Security</h3>
-                    <p>Your data is protected with end-to-end 256-bit encryption, two-factor authentication, and advanced security protocols.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-cogs"></i>
-                    </div>
-                    <h3>Seamless Integration</h3>
-                    <p>Works flawlessly with Azure services, AWS, Google Cloud, and other enterprise platforms via API.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3>Real-time Analytics</h3>
-                    <p>Monitor your uploads with detailed analytics and reporting dashboard for better insights.</p>
-                </div>
-                <div class="feature-card">
+                <div class="feature-card fade-in">
                     <div class="feature-icon">
                         <i class="fas fa-sync-alt"></i>
                     </div>
-                    <h3>Auto Sync</h3>
-                    <p>Set up automatic synchronization between local folders and cloud storage with customizable schedules.</p>
+                    <h3>Automatic Synchronization</h3>
+                    <p>Keep your local files synchronized with Azure cloud storage automatically in real-time.</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card fade-in">
                     <div class="feature-icon">
-                        <i class="fas fa-users"></i>
+                        <i class="fas fa-tachometer-alt"></i>
                     </div>
-                    <h3>Team Collaboration</h3>
-                    <p>Share files securely with team members, set permissions, and track changes with version control.</p>
+                    <h3>High Performance</h3>
+                    <p>Optimized algorithms ensure fast data transfer speeds even with large files and datasets.</p>
                 </div>
-            </div>
-        </section>
-    </div>
-    
-    <!-- Demo Video Section -->
-    <section class="demo-video">
-        <div class="container">
-            <div class="section-title">
-                <h2>See ER-MS 365 in Action</h2>
-            </div>
-            <p>Watch our 2-minute demo vedio to see how ER-MS 365 can transform your data upload workflow</p>
-            <div class="video-container">
-                <iframe src="https://www.youtube.com/" title="ER-MS 365 Demo" allowfullscreen></iframe>
-            </div>
-        </div>
-    </section>
-    
-    <section class="pricing" id="pricing">
-        <div class="container">
-            <div class="section-title">
-                <h2>Simple, Transparent Pricing</h2>
-            </div>
-            <div class="pricing-plan">
-                <h3>Premium Plan</h3>
-                <div class="price">$129.99 <span>/month</span></div>
-                <p>Billed annually at $359.88 (save 20%)</p>
-                <ul class="pricing-features">
-                    <li>Advanced upload features</li>
-                    <li>Priority 24/7 support</li>
-                    <li>Up to 10 user accounts</li>
-                    <li>Full API access</li>
-                    <li>Automated backups</li>
-                    <li>Real-time analytics dashboard</li>
-                    <li>Custom branding options</li>
-                    <li>Team collaboration tools</li>
-                    <li>Regular updates and new features</li>
-                </ul>
-                <a href="#download" class="cta-button">Get Started</a>
-                <p style="margin-top: 1rem; font-size: 0.9rem;">30-day money back guarantee</p>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Integrations Section -->
-    <section class="integrations">
-        <div class="container">
-            <div class="section-title">
-                <h2>Works With Your Favorite Tools</h2>
-            </div>
-            <p>ER-MS 365 integrates seamlessly with the platforms you already use</p>
-            <div class="integration-logos">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Microsoft_Azure_Logo.svg" alt="Azure" class="integration-logo">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS" class="integration-logo">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.svg" alt="Google Cloud" class="integration-logo">
-            </div>
-        </div>
-    </section>
-    
-    <!-- Testimonials Section -->
-    <section class="testimonials">
-        <div class="container">
-            <div class="section-title">
-                <h2>What Our Customers Say</h2>
-            </div>
-            <div class="testimonial-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        ER-MS 365 has revolutionized our data upload process. What used to take hours now takes minutes, and the security features give us peace of mind.
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
                     </div>
-                    <div class="testimonial-author">Sarah Johnson</div>
-                    <div class="testimonial-role">CTO, TechSolutions Inc.</div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        The seamless integration with Azure was exactly what we needed. Our team collaboration has improved dramatically since we implemented ER-MS 365.
-                    </div>
-                    <div class="testimonial-author">Michael Chen</div>
-                    <div class="testimonial-role">IT Director, Global Enterprises</div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        As a non-technical user, I appreciate how intuitive the interface is while still offering powerful features under the hood. Highly recommended!
-                    </div>
-                    <div class="testimonial-author">Emily Rodriguez</div>
-                    <div class="testimonial-role">Marketing Director, BrightStar</div>
+                    <h3>Enterprise Security</h3>
+                    <p>Built with Microsoft's security standards to protect your sensitive business data.</p>
                 </div>
             </div>
         </div>
     </section>
-    
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="container">
+            <div class="section-title">
+                <h2>Choose Your Plan</h2>
+                <p>Select the perfect solution for your data uploading needs</p>
+            </div>
+            <div class="products-grid">
+                <div class="product-card fade-in">
+                    <div class="product-header">
+                        <h3>Standard Edition</h3>
+                        <div class="product-price">$99<span>/one-time</span></div>
+                        <p>Perfect for individual users & small businesses</p>
+                    </div>
+                    <div class="product-body">
+                        <ul class="product-features">
+                            <li><i class="fas fa-check"></i> Upload up to 100GB data to Azure</li>
+                            <li><i class="fas fa-check"></i> Basic synchronization features</li>
+                            <li><i class="fas fa-check"></i> Standard encryption</li>
+                            <li><i class="fas fa-check"></i> Email support</li>
+                            <li><i class="fas fa-check"></i> 1 year of updates</li>
+                            <li><i class="fas fa-check"></i> Windows 10/11 compatible</li>
+                        </ul>
+                        <div class="download-info">
+                            <p><strong>System Requirements:</strong> Windows 10/11, 4GB RAM, 500MB free space</p>
+                            <p><strong>File Size:</strong> 85MB (Installer)</p>
+                        </div>
+                        <a href="#download-standard" class="cta-button" style="width: 100%; text-align: center;">Download Standard</a>
+                    </div>
+                </div>
+                <div class="product-card fade-in">
+                    <div class="product-badge">PREMIUM</div>
+                    <div class="product-header">
+                        <h3>Premium Edition</h3>
+                        <div class="product-price">$199<span>/one-time</span></div>
+                        <p>For enterprises with advanced data needs</p>
+                    </div>
+                    <div class="product-body">
+                        <ul class="product-features">
+                            <li><i class="fas fa-check"></i> Unlimited Azure data upload</li>
+                            <li><i class="fas fa-check"></i> Advanced synchronization</li>
+                            <li><i class="fas fa-check"></i> Military-grade encryption</li>
+                            <li><i class="fas fa-check"></i> Priority phone & email support</li>
+                            <li><i class="fas fa-check"></i> Lifetime updates</li>
+                            <li><i class="fas fa-check"></i> Batch processing</li>
+                            <li><i class="fas fa-check"></i> Custom Azure integration</li>
+                        </ul>
+                        <div class="download-info">
+                            <p><strong>System Requirements:</strong> Windows 10/11, 8GB RAM, 1GB free space</p>
+                            <p><strong>File Size:</strong> 120MB (Installer)</p>
+                        </div>
+                        <a href="#download-premium" class="cta-button" style="width: 100%; text-align: center;">Download Premium</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-title">
+                <h2>How It Works</h2>
+                <p>Simple steps to get started with ER Azure Portal</p>
+            </div>
+            <div class="steps">
+                <div class="step fade-in">
+                    <div class="step-number">1</div>
+                    <h3>Download & Install</h3>
+                    <p>Download the software and follow the simple installation wizard</p>
+                </div>
+                <div class="step fade-in">
+                    <div class="step-number">2</div>
+                    <h3>Configure Azure</h3>
+                    <p>Connect to your Azure account with secure authentication</p>
+                </div>
+                <div class="step fade-in">
+                    <div class="step-number">3</div>
+                    <h3>Upload Data</h3>
+                    <p>Select files and folders to upload to Azure cloud storage</p>
+                </div>
+                <div class="step fade-in">
+                    <div class="step-number">4</div>
+                    <h3>Manage & Sync</h3>
+                    <p>Monitor upload progress and set up automatic synchronization</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- FAQ Section -->
-    <section class="faq">
+    <section class="faq" id="faq">
         <div class="container">
             <div class="section-title">
                 <h2>Frequently Asked Questions</h2>
+                <p>Find answers to common questions about our software</p>
             </div>
-            <div class="faq-item">
-                <div class="faq-question">
-                    What file types does ER-MS 365 support?
-                    <i class="fas fa-chevron-down"></i>
+            <div class="faq-container">
+                <div class="faq-item fade-in">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        Do I need a Microsoft Azure account to use this software?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, you need an active Microsoft Azure subscription to upload data to Azure cloud services. Our software acts as a bridge between your local files and Azure storage.</p>
+                    </div>
                 </div>
-                <div class="faq-answer">
-                    ER-MS 365 supports all common file types including documents (XLSX, CSV), and compressed files (ZIP, RAR). There are no restrictions on file types.
+                <div class="faq-item fade-in">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        What Azure services are supported?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our software supports Azure Blob Storage, Azure Files, and Azure Data Lake Storage. Premium edition includes additional support for custom Azure integrations.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">
-                    Is my data secure with ER-MS 365?
-                    <i class="fas fa-chevron-down"></i>
+                <div class="faq-item fade-in">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        Is this a one-time payment or subscription?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Both Standard and Premium editions are available with a one-time payment. You pay once and get the software with updates included (1 year for Standard, lifetime for Premium).</p>
+                    </div>
                 </div>
-                <div class="faq-answer">
-                    Absolutely. We use 256-bit end-to-end encryption for all data transfers and storage. Additionally, we offer two-factor authentication and comply with major data protection regulations including GDPR and CCPA.
+                <div class="faq-item fade-in">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        What operating systems are supported?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Currently, our software is compatible with Windows 10 and Windows 11. We're working on macOS and Linux versions for future releases.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">
-                    Can I try before I buy?
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    Yes! We offer a fully-featured 1-day free trial with no credit card required. After the trial period, you can choose to subscribe to our premium plan.
-                </div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">
-                    How does the pricing work for teams?
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    Our premium plan includes up to 1 user accounts. For larger teams, we offer enterprise pricing with custom user limits and additional features. Contact our sales team for enterprise quotes.
-                </div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">
-                    What if I need help setting up?
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    Our premium customers get access to 24/7 priority support including live chat, email, and phone support. We also offer onboarding sessions with our technical team to ensure smooth implementation.
+                <div class="faq-item fade-in">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        Do you offer technical support?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we offer email support for all our customers. Premium users receive priority support with phone and faster response times.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-    
-    <section class="download" id="download">
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
         <div class="container">
-            <div class="section-title">
-                <h2>Download ER-MS 365</h2>
-            </div>
-            <p>Get started with ER-MS 365 today. Choose your platform below.</p>
-            <div class="download-options">
-                <a href="https://www.facebook.com/shahriar.shakil.nobab" class="cta-button"><i class="fab fa-windows"></i> Windows</a>
-                <a href="https://www.facebook.com/shahriar.shakil.nobab" class="cta-button"><i class="fab fa-apple"></i> macOS</a>
-                <a href="https://www.facebook.com/shahriar.shakil.nobab" class="cta-button"><i class="fab fa-linux"></i> Linux</a>
-            </div>
-            <p style="margin-top: 1rem;">System Requirements: Windows 10+, macOS 10.14+, Linux, 4GB RAM, 500MB disk space</p>
+            <h2>Need Technical Support?</h2>
+            <p>Our team is available to help you with installation, configuration, and any technical issues</p>
+            <a href="mailto:support@erazureportal.com" class="support-button">
+                <i class="fas fa-envelope"></i> Contact Support
+            </a>
         </div>
     </section>
-    
-    <section class="contact">
-        <div class="container">
-            <div class="section-title">
-                <h2>Contact Us</h2>
-            </div>
-            <p>Have questions? We're here to help!</p>
-            <div class="contact-buttons">
-                <a href="https://wa.me/8801795541326" class="contact-button whatsapp">
-                    <i class="fab fa-whatsapp"></i> WhatsApp: +880 173 554 1326
-                </a>
-                <a href="mailto:er.mailer2@yahoo.com" class="contact-button email">
-                    <i class="fas fa-envelope"></i> Email: er.mailer2@yahoo.com
-                </a>
-                <a href="tel:+8801735541326" class="contact-button">
-                    <i class="fas fa-phone"></i> Call: +880 179 554 1326
-                </a>
-            </div>
-        </div>
-    </section>
-    
+
+    <!-- Footer -->
     <footer>
-        <div class="logo" style="font-size: 1.8rem; margin-bottom: 1rem;">
-            ER-MS<span>365</span> Advanced Data Upload Software
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>ER | Azure Portal</h3>
+                    <p>Professional desktop application for secure data uploading to Microsoft Azure cloud services.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-microsoft"></i></a>
+                        <a href="#"><i class="fab fa-windows"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Products</h3>
+                    <ul>
+                        <li><a href="#products">Standard Edition</a></li>
+                        <li><a href="#products">Premium Edition</a></li>
+                        <li><a href="#contact">Enterprise Solutions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">System Requirements</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">License Agreement</a></li>
+                        <li><a href="#">Compliance</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 ER | Azure Portal. This product is not affiliated with Microsoft Corporation. Azure is a trademark of Microsoft Corporation.</p>
+            </div>
         </div>
-        <div class="footer-links">
-            <a href="#">Home</a>
-            <a href="#features">Features</a>
-            <a href="#pricing">Pricing</a>
-            <a href="#download">Download</a>
-            <a href="#contact">Contact</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-            <a href="#">SLA</a>
-            <a href="#">Blog</a>
-            <a href="#">Careers</a>
-        </div>
-        <div style="margin: 1rem 0;">
-            <a href="https://www.facebook.com/shahriar.shakil.nobab" style="color: white; margin: 0 0.5rem;"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://www.facebook.com/shahriar.shakil.nobab" style="color: white; margin: 0 0.5rem;"><i class="fab fa-twitter"></i></a>
-            <a href="https://www.youtube.com/@ERMailer" style="color: white; margin: 0 0.5rem;"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://www.youtube.com/@ERMailer" style="color: white; margin: 0 0.5rem;"><i class="fab fa-youtube"></i></a>
-        </div>
-        <p>&copy; 2025 ER-MS 365 Azure Portal. All rights reserved.</p>
     </footer>
 
     <script>
-        // Simple FAQ toggle functionality
-        document.querySelectorAll('.faq-question').forEach(question => {
-            question.addEventListener('click', () => {
-                const faqItem = question.parentElement;
-                faqItem.classList.toggle('active');
-                
-                // Close other open FAQs
-                document.querySelectorAll('.faq-item').forEach(item => {
-                    if (item !== faqItem && item.classList.contains('active')) {
-                        item.classList.remove('active');
-                    }
+        // Toggle FAQ answers
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('i');
+            
+            if (answer.classList.contains('active')) {
+                answer.classList.remove('active');
+                icon.classList.remove('fa-chevron-up');
+                icon.classList.add('fa-chevron-down');
+            } else {
+                // Close all other FAQ answers
+                document.querySelectorAll('.faq-answer').forEach(item => {
+                    item.classList.remove('active');
                 });
+                document.querySelectorAll('.faq-question i').forEach(item => {
+                    item.classList.remove('fa-chevron-up');
+                    item.classList.add('fa-chevron-down');
+                });
+                
+                answer.classList.add('active');
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-up');
+            }
+        }
+
+        // Mobile menu toggle
+        document.getElementById('mobile-menu').addEventListener('click', function() {
+            const nav = document.getElementById('nav-menu');
+            if (nav.classList.contains('active')) {
+                nav.classList.remove('active');
+            } else {
+                nav.classList.add('active');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (window.innerWidth <= 768) {
+                        document.getElementById('nav-menu').classList.remove('active');
+                    }
+                }
             });
         });
+
+        // Fade in animation on scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const fadeInOnScroll = () => {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.style.opacity = "1";
+                    element.style.transform = "translateY(0)";
+                }
+            });
+        };
+
+        // Set initial state for fade elements
+        fadeElements.forEach(element => {
+            element.style.opacity = "0";
+            element.style.transform = "translateY(20px)";
+            element.style.transition = "opacity 0.8s ease, transform 0.8s ease";
+        });
+
+        window.addEventListener('scroll', fadeInOnScroll);
+        // Initial check in case elements are already in view
+        fadeInOnScroll();
     </script>
 </body>
 </html>
